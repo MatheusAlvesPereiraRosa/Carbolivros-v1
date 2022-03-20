@@ -16,12 +16,10 @@ export function Cadastro() {
 
     const valorInput = (e) => {
         setLivro({ ...livro, [e.target.name]: e.target.value})
-        console.log(livro); 
     };
 
     const cadLivro = async (e) => {
         e.preventDefault()
-        console.log(livro);
 
         await fetch("http://localhost/API_livros/cadastrar.php", {
             method: 'post',
@@ -57,8 +55,8 @@ export function Cadastro() {
             <div className='container-cadastro'>
                 <h1 className='titulo'>Carbolivros</h1>
 
-                {status.type === 'erro'? <p>{status.mensagem}</p> : ""}
-                {status.type === 'sucess'? <p>{status.mensagem}</p> : ""}
+                {status.type === 'erro'? <div className='error'>{status.mensagem}</div> : ""}
+                {status.type === 'sucess'? <div className='sucess'>{status.mensagem}</div> : ""}
 
                 <form onSubmit={cadLivro} className='container-inputs'>
                     <input type="text" name='nome' placeholder='Nome do livro' onChange={valorInput} />

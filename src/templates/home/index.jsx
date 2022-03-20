@@ -7,11 +7,12 @@ export function Home() {
   const [searchValue, setSearchValue] = useState('');
 
   const getProdutos = async () => {
-    fetch('http://localhost/API_livros/index.php')
+    await fetch('http://localhost/API_livros/index.php')
     .then((response) => response.json())
     .then((responseJson) => (
       setLivros(responseJson.livros)
     ))
+    console.log('peguei os livros da API');
   }
 
   const handleChange = (e) => {
@@ -37,7 +38,9 @@ export function Home() {
     if (!searchValue) {
       getProdutos();
     }
-  }, [livros])
+
+    console.log('carreguei os livros');
+  }, [searchValue])
 
   return (
     <main>
@@ -48,7 +51,7 @@ export function Home() {
           <h1>Search value: {searchValue}</h1>
         )}
       </div>
-
+        
       <Books livros={livros}/>
     </main>
   );
